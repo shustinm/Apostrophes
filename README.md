@@ -1,6 +1,8 @@
 # Apostrophes
 Adds apostrophes so you don't have to!
 
+For example: If you write the word "dont", it will change to "don't". Or writing "im" would result in "I'm"
+
 # Downloads
 
 [32-bit](https://github.com/shustinm/Apostrophes/raw/master/bin/Apostrophes%20(32-bit).exe)
