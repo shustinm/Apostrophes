@@ -9,35 +9,48 @@ if ErrorLevel   ; i.e. it's not blank or zero, file doesn't exist
 FileRead, settings, settings.txt
 IfNotInString, settings, showinfo=false
 {
-	MsgBox,4,How-To: Apostrophes,This program will automatically add apostrophes ( ' ) where they are needed when you type, it will also automatically capitalize the letter "i".`nIf you still want to type "i", you must type "ii" instead.`nPress Control + Shift + R to reload the program`nPress the Pause key on your keyboard to stop it, press again to resume.`nThe Program is already running in the background, try it out!`n`nDo you want to see this message next time you run the program?
+	MsgBox,3,Apostrophes basics,This program will automatically add apostrophes ( ' ) where they are needed when you type, it will also automatically capitalize the letter "i".`nIf you still want to type "i", you must type "ii" instead.`nPress Control + Shift + R to reload the program`nPress the Pause key on your keyboard to stop it, press again to resume.`nThe Program is already running in the background, try it out!`n`nDo you want to see this message next time you run the program?
 	IfMsgBox, No
 		FileAppend,`nshowinfo=false,settings.txt 
 }
 
-IfNotInString, settings, runAtStartup=true
+IfNotInString, settings, runAtStartup=false
 {
-	MsgBox,4,Run at startup?, Do you want this program to run when windows starts?
-	IfMsgBox, Yes
+	IfNotInString, settings, runAtStartup=true
 	{
-		SplitPath, A_Scriptname, , , , OutNameNoExt 
-		LinkFile=%A_StartupCommon%\%OutNameNoExt%.lnk		
-		FileCreateShortcut, %A_ScriptFullPath%, %LinkFile%
-		FileAppend,`nrunAtStartup=true,settings.txt
+		MsgBox,3,Apostrophes, Do you want this program to run when windows starts?
+		IfMsgBox, Yes
+		{
+			SplitPath, A_Scriptname, , , , OutNameNoExt 
+			LinkFile=%A_StartupCommon%\%OutNameNoExt%.lnk		
+			FileCreateShortcut, %A_ScriptFullPath%, %LinkFile%
+			FileAppend,`nrunAtStartup=true,settings.txt
+		}
+		
+		IfMsgBox, No
+		{
+			FileAppend,`nrunAtStartup=false,settings.txt
+		}
 	}
 }
 
+
+::aint::ain't
 ::arent::aren't
 ::cant::can't
 ::couldnt::couldn't
+::couldve::could've
 ::didnt::didn't
 ::doesnt::doesn't
 ::dont::don't
 ::hadnt::hadn't
+::hasnt::hasn't
 ::havent::haven't
 ::hed::he'd
 ::i::I
 ::ii::i
-::id::I'd
+:c:id::I'd
+:c:Id::I'd
 ::ill::I'll
 ::im::I'm
 ::ive::I've
@@ -46,8 +59,10 @@ IfNotInString, settings, runAtStartup=true
 ::howd::how'd
 ::lets::let's
 ::mustnt::mustn't
+::mustve::must've
 ::shant::shan't
 ::shell::she'll
+::shelll::shell
 ::shes::she's
 ::shouldnt::shouldn't
 ::thats::that's
@@ -57,6 +72,7 @@ IfNotInString, settings, runAtStartup=true
 ::theyre::they're
 ::theyve::they've
 ::wed::we'd
+::wedd::wed
 ::weve::we've
 ::werent::weren't
 ::whatll::what'll
